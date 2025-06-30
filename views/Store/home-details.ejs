@@ -1,0 +1,61 @@
+<%- include('../partials/head') %>
+  </head>
+
+  <body class="bg-gray-50">
+    <%- include('../partials/nav') %>
+
+      <main class="w-full md:w-4/5 lg:w-3/5 mx-auto mt-8 p-4 bg-white shadow-md rounded-md">
+        <h2 class="text-2xl font-semibold text-red-500 mb-6 text-center">
+          Details of: <%= home.houseName %>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Image -->
+          <div class="rounded-md overflow-hidden shadow-sm h-64">
+            <img src="<%= home.photo %>" alt="<%= home.houseName %>" class="w-full h-[80%] object-cover">
+            <div>
+              <a class="text-blue-800" href="/rules/<%=home._id%>" >Download rule book</a>
+            </div>
+          </div>
+          
+
+          <!-- Info -->
+          <div class="space-y-3 text-gray-700 text-sm bg-gray-50 p-4 rounded-md shadow-inner">
+            <!-- Description -->
+            <div>
+              <h3 class="font-medium text-base flex items-center gap-2 mb-1">📝 Description</h3>
+              <p class="whitespace-pre-line leading-snug">
+                <%= home.description %>
+              </p>
+            </div>
+            <hr>
+
+            <!-- Location -->
+            <div>
+              <h3 class="font-medium text-base flex items-center gap-2 mb-1">📍 Location</h3>
+              <p>
+                <%= home.location %>
+              </p>
+            </div>
+            <hr>
+
+            <!-- Price -->
+            <div>
+              <h3 class="font-medium text-base flex items-center gap-2 mb-1">💰 Price</h3>
+              <p>₹ <%= home.price %> / night</p>
+            </div>
+            <hr>
+
+            <!-- Rating -->
+            <div>
+              <h3 class="font-medium text-base flex items-center gap-2 mb-1">⭐ Rating</h3>
+              <p>
+                <%= home.rating %> / 5
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+  </body>
+
+  </html>

@@ -1,0 +1,129 @@
+<%- include('../partials/head') %>
+  </head>
+
+  <body class="bg-gray-100 text-gray-800 font-sans">
+    <%- include('../partials/nav', { editing: editing }) %>
+
+      <main class="flex justify-center items-center min-h-screen p-4">
+        <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 sm:p-10">
+          <h1 class="text-3xl font-bold text-center text-gray-900 mb-8">
+            Sign Up to Airbnb
+          </h1>
+
+          <%- include('../partials/errors') %>
+
+            <form action="/signup" method="POST" class="space-y-5">
+
+              <!-- Name Inputs in One Row -->
+              <div class="flex flex-col sm:flex-row gap-4">
+                <div class="relative w-full">
+                  <span class="absolute left-3 top-2.5 text-gray-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12v.01" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5.121 17.804A13.937 13.937 0 0112 15c2.388 0 4.637.624 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </span>
+                  <input required type="text" name="firstName" placeholder="First Name"
+                    value="<%= oldInput.firstName ? oldInput.firstName : '' %>"
+                    class="w-full pl-10 pr-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+                </div>
+                <div class="relative w-full">
+                  <span class="absolute left-3 top-2.5 text-gray-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 12v.01M5.121 17.804A13.937 13.937 0 0112 15c2.388 0 4.637.624 6.879 1.804" />
+                    </svg>
+                  </span>
+                  <input type="text" name="lastName" placeholder="Last Name"
+                    value="<%= oldInput.lastName ? oldInput.lastName : '' %>"
+                    class="w-full pl-10 pr-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-gray-400">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m8 0V6m0 6v6" />
+                  </svg>
+                </span>
+                <input required type="email" name="email" placeholder="Email"
+                  value="<%= oldInput.email ? oldInput.email : '' %>"
+                  class="w-full pl-10 pr-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+              </div>
+
+              <!-- Password -->
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-gray-400">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M4 20v-1a4 4 0 014-4h8a4 4 0 014 4v1H4z" />
+                  </svg>
+                </span>
+                <input required type="password" name="password" placeholder="Password"
+                  class="w-full pl-10 pr-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-gray-400">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 14v6m0 0h.01M16.24 7.76a5 5 0 11-8.48 0" />
+                  </svg>
+                </span>
+                <input required type="password" name="confirmPassword" placeholder="Confirm Password"
+                  class="w-full pl-10 pr-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+              </div>
+
+              <!-- User Type Toggle -->
+              <div class="flex flex-col gap-2">
+                <label class="text-sm font-medium text-gray-700">I am registering as:</label>
+                <div class="inline-flex items-center border border-gray-300 rounded-md overflow-hidden w-full sm:w-64">
+                  <label class="w-1/2 cursor-pointer">
+                    <input type="radio" name="userType" value="Guest" class="hidden peer" required
+                      checked="<% oldInput.userType === 'Guest' %>" />
+                    <div
+                      class="peer-checked:bg-red-500 peer-checked:text-white text-center px-4 py-2 text-sm transition">
+                      👤 Guest
+                    </div>
+                  </label>
+                  <label class="w-1/2 cursor-pointer">
+                    <input type="radio" name="userType" value="Host" class="hidden peer"
+                      checked="<% oldInput.userType === 'Host' %>" />
+                    <div
+                      class="peer-checked:bg-red-500 peer-checked:text-white text-center px-4 py-2 text-sm transition">
+                      🏠 Host
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Terms Checkbox -->
+              <div class="flex items-start gap-2 text-sm">
+                <input type="checkbox" name="Terms and condition" required class="accent-red-500 mt-1" />
+                <label class="text-gray-600">
+                  I agree to the <a href="#" class="text-red-500 hover:underline">Terms & Conditions</a>
+                </label>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit"
+                class="w-full py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md text-sm transition-all duration-300">
+                Create Account
+              </button>
+            </form>
+
+            <!-- Already have account -->
+            <p class="text-sm text-center text-gray-600 mt-6">
+              Already have an account?
+              <a href="/login" class="text-red-500 hover:underline">Log In</a>
+            </p>
+        </div>
+      </main>
+  </body>
+
+  </html>

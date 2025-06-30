@@ -1,0 +1,92 @@
+<%- include('../partials/head') %>
+  </head>
+
+  <body class="bg-gray-50">
+    <% console.log("Editing:", editing); %>
+      <%- include('../partials/nav', { editing: editing }) %>
+
+        <main class="max-w-2xl w-[90%] mx-auto mt-10 bg-white p-8 shadow-lg rounded-lg">
+          <h1 class="text-3xl font-bold mb-8 text-center text-red-500">
+            <%= editing ? "Edit Your Home" : "Register Your Home on AirBnB" %>
+          </h1>
+
+          <form action="/host/<%= editing ? 'edit-home' : 'add-home' %>" method="POST" enctype="multipart/form-data" class="space-y-5">
+
+            <input type="hidden" name="id" value="<%= (editing && home && home._id) ? home._id : '' %>" />
+
+            <!-- House Name -->
+            <div class="relative">
+              <input type="text" name="houseName" value="<%= editing ? home.houseName : '' %>" placeholder="House Name"
+                class="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+              <div class="absolute top-2.5 left-3 text-gray-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M3 12l2-2m0 0l7-7 7 7m-7-7v18" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Price -->
+            <div class="relative">
+              <input type="number" step="0.01" name="price" value="<%= editing ? home.price : '' %>"
+                placeholder="Price per night"
+                class="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+              <div class="absolute top-2.5 left-3 text-gray-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M12 8c-1.11 0-2 .89-2 2s.89 2 2 2 2-.89 2-2-.89-2-2-2z M12 4v4m0 4v4m-8-4h16" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="relative">
+              <input type="text" name="location" value="<%= editing ? home.location : '' %>" placeholder="Location"
+                class="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+              <div class="absolute top-2.5 left-3 text-gray-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M12 11c1.66 0 3-1.34 3-3S13.66 5 12 5s-3 1.34-3 3 1.34 3 3 3z M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="relative">
+              <input type="number" step="0.1" name="rating" value="<%= editing ? home.rating : '' %>"
+                placeholder="Rating"
+                class="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+              <div class="absolute top-2.5 left-3 text-yellow-500">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 
+              1.371 1.24.588 1.81l-2.8 2.034a1 1 0 
+              00-.364 1.118l1.07 3.292c.3.921-.755 
+              1.688-1.54 1.118l-2.8-2.034a1 1 0 
+              00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 
+              1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 
+              1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Photo URL -->
+            <div class="relative">
+              <input type="file" name="photo" multiple accept="image/jpg,image/png,image/jpeg"
+                class="w-full pl-10 pr-4 py-2 border rounded-md  focus:ring-2 focus:ring-red-500" />
+              <div class="absolute top-2.5 left-3 text-gray-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M3 5h18M5 7h14M8 10h8M6 13h12M10 16h4M12 20h.01" />
+                </svg>
+              </div>
+            </div>
+            <!-- Description -->
+            <textarea name="description" placeholder="House Description"
+              class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
+              rows="4"><%= editing ? home.description : '' %></textarea>
+
+            <!-- Submit Button -->
+            <input type="submit" value="<%= editing ? 'Update Home' : 'Submit' %>"
+              class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-md transition duration-300 cursor-pointer" />
+          </form>
+        </main>
+  </body>
+
+  </html>

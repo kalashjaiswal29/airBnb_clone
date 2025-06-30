@@ -1,0 +1,64 @@
+<%- include('../partials/head') %>
+  </head>
+
+  <body class="bg-gray-100 text-gray-800 font-sans">
+    <%- include('../partials/nav', { editing: editing }) %>
+
+      <main class="flex justify-center items-center min-h-screen p-4">
+        <div class="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 sm:p-10">
+          <h1 class="text-3xl font-bold text-center text-gray-900 mb-8">
+            Log In to Airbnb
+          </h1>
+
+          <%-include('../partials/errors')%>
+
+            <form action="/login" method="POST" class="space-y-6">
+
+              <!-- Email Input -->
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-gray-400">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m8 0V6m0 6v6" />
+                  </svg>
+                </span>
+                <input required type="email" name="email" value="<%= oldInput.email ? oldInput.email : '' %>"
+                  placeholder="Enter your registered email"
+                  class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+              </div>
+
+              <!-- Password Input -->
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-gray-400">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M4 20v-1a4 4 0 014-4h8a4 4 0 014 4v1H4z" />
+                  </svg>
+                </span>
+                <input required type="password" name="password" placeholder="Password"
+                  class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+              </div>
+
+              <!-- Forgot Password -->
+              <div class="text-right">
+                <a href="#" class="text-sm text-red-500 hover:underline">Forgot Password?</a>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit"
+                class="w-full py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md text-sm transition-all duration-300">
+                Log In
+              </button>
+            </form>
+
+            <!-- Sign Up Prompt -->
+            <p class="text-sm text-center text-gray-600 mt-6">
+              Don't have an account?
+              <a href="/signup" class="text-red-500 hover:underline">Create one</a>
+            </p>
+        </div>
+      </main>
+  </body>
+
+  </html>

@@ -1,0 +1,149 @@
+<!-- new -->
+
+<header class="bg-white shadow-md">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <a href="/" class="text-2xl font-bold text-red-500 hover:text-red-600 transition">
+          airBnB
+        </a>
+      </div>
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-4 items-center">
+        <% if (isLoggedIn) { %>
+
+          <% if (user && user.userType==="Guest" ) { %>
+
+            <a href="/homes"
+              class="flex items-center space-x-1 px-3 py-2 rounded-md text-sm <%= currPage==='home' ? 'bg-red-100 text-red-600' : 'text-gray-700 hover:bg-gray-100' %>">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6"></path>
+              </svg>
+              <span>Home List</span>
+            </a>
+            <a href="/bookings"
+              class="flex items-center space-x-1 px-3 py-2 rounded-md text-sm <%= currPage==='bookings' ? 'bg-red-100 text-red-600' : 'text-gray-700 hover:bg-gray-100' %>">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M8 7V3m8 4V3m-9 8h10m-9 4h6m5-9H5a2 2 0 00-2 2v11a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2z">
+                </path>
+              </svg>
+              <span>Bookings</span>
+            </a>
+            <a href="/favourates"
+              class="flex items-center space-x-1 px-3 py-2 rounded-md text-sm <%= currPage==='favourates' ? 'bg-red-100 text-red-600' : 'text-gray-700 hover:bg-gray-100' %>">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M5 15l7-7 7 7"></path>
+              </svg>
+              <span>Favourites</span>
+            </a>
+
+            <% } %>
+
+              <% if (user && user.userType==="Host" ) { %>
+
+                <a href="/host/Host-homeList"
+                  class="flex items-center space-x-1 px-3 py-2 rounded-md text-sm <%= currPage==='host-homeList' ? 'bg-red-100 text-red-600' : 'text-gray-700 hover:bg-gray-100' %>">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M3 10h18M9 21V10m6 11V10"></path>
+                  </svg>
+                  <span>Host Homes</span>
+                </a>
+                <a href="/host/add-home"
+                  class="flex items-center space-x-1 px-3 py-2 rounded-md text-sm <%= currPage==='add-home' ? 'bg-red-100 text-red-600' : 'text-gray-700 hover:bg-gray-100' %>">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 4v16m8-8H4"></path>
+                  </svg>
+                  <span>Add Home</span>
+                </a>
+
+                <% } %>
+
+                  <% } %>
+
+      </div>
+
+
+      <!-- Auth Buttons -->
+      <div class="hidden md:flex items-center space-x-3">
+
+        <% if (!isLoggedIn) { %>
+
+          <a href="/login"
+            class="flex items-center px-4 py-2 border border-red-500 text-red-500 rounded-full hover:bg-red-50 transition">
+            <svg class="w-5 h-5 mr-2 text-red-500" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15 12H3m0 0l4-4m-4 4l4 4m13-9v10a2 2 0 01-2 2h-4a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2z" />
+            </svg>
+            Login
+          </a>
+
+          <a href="/signup"
+            class="flex items-center px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition">
+            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            Sign Up
+          </a>
+          <% } else { %>
+            <form action="/logout" method="POST">
+              <button type="submit"
+                class="flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-full hover:bg-gray-100 transition">
+                <svg class="w-5 h-5 mr-2 text-gray-700" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+                </svg>
+                Logout
+              </button>
+            </form>
+
+            <% } %>
+
+      </div>
+
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"
+          class="text-red-500 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="md:hidden  flex flex-col gap-2 py-2">
+
+      <% if (isLoggedIn) { %>
+
+        <% if (user && user.userType==="Guest" ) { %>
+
+          <a href="/homes" class="px-4 py-2 text-gray-700 hover:bg-gray-100">🏠 Home List</a>
+          <a href="/bookings" class="px-4 py-2 text-gray-700 hover:bg-gray-100">📅 Bookings</a>
+          <a href="/favourates" class="px-4 py-2 text-gray-700 hover:bg-gray-100">❤️ Favourites</a>
+
+          <% } %>
+
+            <% if (user && user.userType==="Host" ) { %>
+
+              <a href="/host/Host-homeList" class="px-4 py-2 text-gray-700 hover:bg-gray-100">🏘️ Host Homes</a>
+              <a href="/host/add-home" class="px-4 py-2 text-gray-700 hover:bg-gray-100">➕ Add Home</a>
+
+              <% } %>
+
+                <form action="/logout" method="POST">
+                  <button type="submit" class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100">🚪
+                    Logout</button>
+                </form>
+                <% } else { %>
+                  <a href="/login" class="px-4 py-2 text-gray-700 hover:bg-gray-100">🔐 Login</a>
+                  <a href="/signup" class="px-4 py-2 text-gray-700 hover:bg-gray-100">📝 Sign Up</a>
+                  <% } %>
+    </div>
+  </nav>
+</header>
